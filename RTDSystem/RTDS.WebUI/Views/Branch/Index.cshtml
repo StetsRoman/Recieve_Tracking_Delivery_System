@@ -1,0 +1,61 @@
+﻿@model IEnumerable<RTDS.Domain.Entities.Branch>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Склади</h2>
+
+<p>
+    @Html.ActionLink("Додати", "Create", null, new { @class = "btn" })
+</p>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            №
+        </th>
+        <th>
+            Місто
+        </th>
+        <th>
+            Адреса
+        </th>
+        <th>
+            Тип
+        </th>
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.Label(item.BranchID.ToString())
+            </td>
+            <td>
+                @Html.Label(item.City.CityName)
+            </td>
+            <td>
+                <label>
+                    @Html.Label(string.Format("{0}, {1}", item.Street, item.House))
+                </label>
+            </td>  
+            <td>
+                @Html.Label(item.BranchType.BranchName)
+            </td> 
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { branchID = item.BranchID }, new { @class = "btn" })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { branchID = item.BranchID }, new { @class = "btn" })
+
+            </td>
+        </tr>
+    }
+
+
+
+</table>

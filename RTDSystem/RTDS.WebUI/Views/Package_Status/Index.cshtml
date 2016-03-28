@@ -1,0 +1,51 @@
+﻿@model IEnumerable<RTDS.Domain.Entities.Package_Statuses>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Статуси</h2>
+
+@using (Html.BeginForm("Index", "Package_Status"))
+{
+
+    <table class="table table-bordered table-striped" id="Package_StatusTable">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Назва
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.Label(item.Package_StatusID.ToString())
+                </td>
+                <td>
+                    @Html.Label(item.Status_Name)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { roleID = item.Package_StatusID }, new { @class = "btn" })
+
+                </td>
+            </tr>
+        }
+
+
+    </table>
+
+    <div>
+        <input type="text"  id="newPackage_StatusTb" value="" style="margin-left:2.5em" />
+        <button id="AddPSbutton" class="btn" style="margin-bottom:0.9em"> Додати стан пакунку</button>
+    </div>
+
+}

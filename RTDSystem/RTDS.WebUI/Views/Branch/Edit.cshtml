@@ -1,0 +1,35 @@
+﻿@model RTDS.Domain.Entities.Branch
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редагування відділення № @Model.BranchID</h2>
+
+@{
+    List<SelectListItem> cityLst = ViewBag.City;
+    List<SelectListItem> typeLst = ViewBag.Type;
+}
+@using (Html.BeginForm("Edit", "Branch"))
+{
+
+    <div>
+        @Html.Label("Місто") @Html.DropDownListFor(m => m.CityID, cityLst, "Виберіть", new {id="cityDD" })
+        
+        <input type="text" name="newCity" id="newCityTb" value="" style="margin-left:2.5em"/>         
+        <button id="button1" style="margin-bottom:0.9em"> Додати місто</button>
+        
+    </div>
+
+    <div>@Html.Label("Вулиця") @Html.EditorFor(m => m.Street)</div>
+    <div>@Html.Label("Будинок") @Html.EditorFor(m => m.House)</div>
+    
+    <div>
+        @Html.Label("Тип") @Html.DropDownListFor(m => m.BranchTypeID, typeLst, "Виберіть")
+    </div>
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary" value="Save" />
+        @Html.ActionLink("Відмінити", "Index", null, new { @class = "btn" })
+    </div>
+}

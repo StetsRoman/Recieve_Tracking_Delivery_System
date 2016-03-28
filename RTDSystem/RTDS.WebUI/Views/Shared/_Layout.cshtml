@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="~/Content/site.css" rel="stylesheet">
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/site.js"></script>
+    <title>@ViewBag.Title</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#CityId").change(function () {
+                $("#BranchId").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Users/GetBranches/',
+
+                    dataType: 'json',
+
+                    data: { id: $("#CityId").val() },
+                    success: function (branches) {
+                        $.each(branches, function (i, branch) {
+                            $("#BranchId").append('<option value="' + branch.Value + '">' + branch.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Не знайдено жодного складу' + ex);
+                    }
+                });
+                return false;
+            })
+
+            $("#cityId").change(function () {
+                $("#SourceLocation").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Package/GetBranches/',
+
+                    dataType: 'json',
+
+                    data: { id: $("#cityId").val() },
+                    success: function (branches) {
+                        $.each(branches, function (i, branch) {
+                            $("#SourceLocation").append('<option value="' + branch.Value + '">' + branch.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Не знайдено жодного складу' + ex);
+                    }
+                });
+                return false;
+            })
+            $("#cityId2").change(function () {
+                $("#DestinationLocation").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Package/GetBranches/',
+
+                    dataType: 'json',
+
+                    data: { id: $("#cityId2").val() },
+                    success: function (branches) {
+                        $.each(branches, function (i, branch) {
+                            $("#DestinationLocation").append('<option value="' + branch.Value + '">' + branch.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Не знайдено жодного складу' + ex);
+                    }
+                });
+                return false;
+            })
+            $("#cityId3").change(function () {
+                $("#CurrentLocation").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Package/GetBranches/',
+
+                    dataType: 'json',
+
+                    data: { id: $("#cityId3").val() },
+                    success: function (branches) {
+                        $.each(branches, function (i, branch) {
+                            $("#CurrentLocation").append('<option value="' + branch.Value + '">' + branch.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Не знайдено жодного складу' + ex);
+                    }
+                });
+                return false;
+            })
+
+
+            $("#button1").click(function () {
+                var name = $("#newCityTb").val();
+                var url = "/Branch/AddNewCity";
+
+                $.get(url, { cityName: name }, function (data) {
+                    $("#cityDD").append('<option value="' + data.CityID + '">' + data.CityName + '</option>');
+                })
+            })
+
+
+            $("#button2").click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Role/AddNewRole',
+                    dataType: 'json',
+                    data: { roleName: $("#newRoleTb").val() },
+                    success: function (data) {
+                        $("#roleTable").append('<tr><td>' + data.RoleID + '</td>' + '<td>' + data.RoleName + '</td>' + '</tr>');
+                    },
+                    error: function (ex) {
+                        alert('Виникла помилка, спробуйте ще раз' + ex);
+                    }
+                });
+                return false;
+            })
+            $("#AddPSbutton").click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Package_Status/AddNewPkgStatus',
+                    dataType: 'json',
+                    data: { statusName: $("#newPackage_StatusTb").val() },
+                    success: function (data) {
+                        $("#Package_StatusTable").append('<tr><td>' + data.Package_StatusID + '</td>' + '<td>' + data.Status_Name + '</td>' + '</tr>');
+                    },
+                    error: function (ex) {
+                        alert('Виникла помилка, спробуйте ще раз' + ex);
+                    }
+                });
+                return false;
+            })
+
+            //$("#searchBtn").click(function () {
+            //    $.ajax({
+            //        type: 'POST',
+            //        url: '/Home/Search',
+            //        dataType: 'json',
+            //        data: { searchString: $("#inSearch").val() },
+            //        success: function (data) {
+            //        },
+            //        error: function (ex) {
+            //            alert('Виникла помилка, спробуйте ще раз' + ex);
+            //        }
+            //    });
+            //    return false;
+            //})
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">DELIVERY</a>
+                    <div class="nav-collapse">
+
+                        <ul class="nav">
+                            <li class="menu-item">
+
+                                @Html.RouteLink("Головна", new
+                           {
+                               controller = "Home",
+                               action = "Index"
+                           })
+                            </li>
+                            <li class="menu-item">
+
+                                @Html.RouteLink("Користувачі", new
+                           {
+                               controller = "Users",
+                               action = "Index"
+                           })
+                            </li>
+                            <li class="menu-item">
+
+                                @Html.RouteLink("Посилки", new
+                           {
+                               controller = "Package",
+                               action = "Index"
+                           })
+                            </li>
+                            <li class="menu-item">
+
+                                @Html.RouteLink("Відділення", new
+                           {
+                               controller = "Branch",
+                               action = "Index"
+                           })
+
+
+                            <li class="dropdown">
+                                <a href="help.html" class="dropdown-toggle" data-toggle="dropdown">Налаштування <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.RouteLink("Ролі користувачів", new
+                           {
+                               controller = "Role",
+                               action = "Index"
+                           })
+                                    </li>
+                                    <li>
+                                        @Html.RouteLink("Статуси посилок", new
+                           {
+                               controller = " Package_Status",
+                               action = "Index"
+                           })
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class = "navbar-search pull-left" }))
+                        {                           
+                                @Html.TextBox("searchString")                        
+
+                        }
+
+                        <ul class="nav pull-right">
+                            <li>
+                                @Html.RouteLink("Авторизація", new
+                           {
+                               controller = "Account",
+                               action = "Login"
+                           })
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span2">
+                <div class="well" style="padding: 8px 0;">
+                    <ul class="nav nav-list">
+                        <li>
+                            <div>
+                                <img src="~/Content/img/icons/home-icon.png" />
+                                @Html.RouteLink("Головна", new
+                           {
+                               controller = "Home",
+                               action = "Index"
+                           })
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="~/Content/img/icons/user-icon.png" />
+                                @Html.RouteLink("Користувачі", new
+                           {
+                               controller = "Users",
+                               action = "Index"
+                           })
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="~/Content/img/icons/package-icon.png" />
+                                @Html.RouteLink("Посилки", new
+                           {
+                               controller = "Package",
+                               action = "Index"
+                           })
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="~/Content/img/icons/warehouse-icon.png" />
+                                @Html.RouteLink("Відділення", new
+                           {
+                               controller = "Branch",
+                               action = "Index"
+                           })
+                            </div>
+                        </li>
+                        <li class="nav-header">
+                            Налаштування
+                        </li>
+                        <li>
+                            <div>
+                                <img src="~/Content/img/icons/roles-icon.png" />
+                                @Html.RouteLink("Ролі користувачів", new
+                           {
+                               controller = "Role",
+                               action = "Index"
+                           })
+                            </div>
+
+                        </li>
+                        <li>
+                            <div>
+                                <img src="~/Content/img/icons/status-icon.png" />
+                                @Html.RouteLink("Статуси посилок", new
+                           {
+                               controller = "Package_Status",
+                               action = "Index"
+                           })
+
+                            </div>
+
+                        </li>
+                        <li class="divider">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span10">
+                @if (TempData["message"] != null)
+                {
+                    <div class="Message" style="padding-bottom:0.5em">@TempData["message"]</div>                }
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>

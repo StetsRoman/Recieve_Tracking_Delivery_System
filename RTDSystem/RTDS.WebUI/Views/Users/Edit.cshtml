@@ -1,0 +1,44 @@
+﻿@model RTDS.Domain.Entities.User
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Редагування користувача: @Model.Last_Name @Model.First_Name</h2>
+@{
+    List<SelectListItem> rolsLst = ViewBag.Rols;
+    List<SelectListItem> cityLst = ViewBag.City;
+}
+
+@using (Html.BeginForm("Edit", "Users"))
+{
+   
+   
+
+    <div>@Html.Label("Логін") @Html.EditorFor(m => m.UserName)</div>
+    <div>@Html.Label("Ім'я") @Html.EditorFor(m => m.First_Name)</div>
+    <div>@Html.Label("Прізвище") @Html.EditorFor(m => m.Last_Name)</div>
+    <div>@Html.Label("Телефон") @Html.EditorFor(m => m.Phone_Number)</div>
+    <div>@Html.Label("Пароль") @Html.EditorFor(m => m.PasswordHash)</div>    
+   
+   
+
+    <div>
+        @Html.Label("Роль") @Html.DropDownListFor(m => m.RoleID, rolsLst)
+    </div>
+    <div>
+        @Html.Label("Місто") @Html.DropDownList("City", cityLst, new {id="CityId" })
+    </div>
+    
+
+    @Html.DropDownList("BranchID", new SelectList(String.Empty, "Value", "Text"), new { id = "BranchId" })
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary" value="Save" />
+        @Html.ActionLink("Відмінити", "Index", null, new { @class = "btn" })
+    </div>
+
+
+
+}

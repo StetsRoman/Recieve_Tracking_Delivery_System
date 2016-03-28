@@ -1,0 +1,78 @@
+﻿@model RTDS.Domain.Entities.Package
+
+@{
+    ViewBag.Title = "PackageOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Накладна</h2>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>
+            <label>Номер посилки </label>
+        </td>
+        <td>
+            @Html.Display("Package_Number")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Відправник </label>
+        </td>
+        <td>
+            @Html.Label(string.Format("{0} {1}", Model.Client1.Last_Name, Model.Client1.First_Name))
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Одержувач</label>
+        </td>
+        <td>
+            @Html.Label(string.Format("{0} {1}", Model.Client.Last_Name, Model.Client.First_Name))
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Склад відправлення </label>
+        </td>
+        <td>
+            @Html.Label(string.Format("{0}, {1}, {2}", Model.Branch2.City.CityName, Model.Branch2.Street, Model.Branch2.House))
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Склад призначення</label>
+        </td>
+        <td>
+            @Html.Label(string.Format("{0}, {1}, {2}", Model.Branch1.City.CityName, Model.Branch1.Street, Model.Branch1.House))
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Поточне місцезнаходження </label>
+        </td>
+        <td>
+            @Html.Label(string.Format("{0}, {1}, {2}", Model.Branch.City.CityName, Model.Branch.Street, Model.Branch.House))
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Дата відправлення</label>
+        </td>
+        <td>
+            @Html.Label(Model.Send_Date.ToString())
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Статус посилки </label>
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.Package_Statuses.Status_Name)
+        </td>
+    </tr>
+</table>
+
+@Html.ActionLink("Оформити", "Index", null, new { @class = "btn" })
+@Html.ActionLink("Друк", "Index", null, new { @class = "btn" })

@@ -1,0 +1,112 @@
+﻿@model IEnumerable<RTDS.Domain.Entities.Package>
+
+@{
+    ViewBag.Title = "Посилки";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="well summary">
+    <ul>
+        <li>
+            <a href="#"><span class="count">@String.Format("{0}", ViewBag.NumOfAllPkg)</span> Всього</a>
+        </li>
+        <li>
+            <a href="#"><span class="count">@String.Format("{0}", ViewBag.NumOfSendPkg)</span> Відправлено</a>
+        </li>
+        <li>
+            <a href="#"><span class="count">@String.Format("{0}", ViewBag.NumOfPkgInRoad)</span> В дорозі</a>
+        </li>
+        <li class="last">
+            <a href="#"><span class="count">@String.Format("{0}", ViewBag.NumOfSDelPkg)</span> Доставлено</a>
+        </li>
+    </ul>
+</div>
+<h2>
+    Посилки
+</h2>
+
+<p>   
+    @Html.ActionLink("Додати", "Create", null, new { @class = "btn" })
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                № посилки
+            </th>
+            <th>
+                Відправник
+            </th>
+            <th>
+                Одержувач
+            </th>
+            <th>
+                Склад відправлення
+            </th>
+            <th>
+                Склад призначення
+            </th>
+            <th>
+                Поточне місцезнаходження
+            </th>
+            <th>
+                Вартість доставки
+            </th>
+            <th>
+                Вага
+            </th>
+            <th>
+                Розмір
+            </th>
+            <th>
+                Статус
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Package_Number)
+                </td>
+                <td>
+                    @Html.Label(string.Format("{0} {1}", item.Client1.Last_Name, item.Client1.First_Name))
+                </td>
+                <td>
+                    @Html.Label(string.Format("{0} {1}", item.Client.Last_Name, item.Client.First_Name))
+                </td>
+                <td>
+                    @Html.Label(string.Format("{0}, {1}, {2}", item.Branch2.City.CityName, item.Branch2.Street, item.Branch2.House))
+                </td>
+                <td>
+                    @Html.Label(string.Format("{0}, {1}, {2}", item.Branch1.City.CityName, item.Branch1.Street, item.Branch1.House))
+                </td>
+                <td>
+                    @Html.Label(string.Format("{0}, {1}, {2}", item.Branch.City.CityName, item.Branch.Street, item.Branch.House))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delivery_Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weith)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Package_Statuses.Status_Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { packageId = item.PackagID }, new { @class = "btn" })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { packageId = item.PackagID }, new { @class = "btn" })
+
+                </td>
+            </tr>
+        }        
+    </tbody>
+    
+</table>

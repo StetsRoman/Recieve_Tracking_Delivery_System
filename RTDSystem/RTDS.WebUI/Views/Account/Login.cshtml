@@ -1,0 +1,21 @@
+﻿@model RTDS.WebUI.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="login-page" class="container">
+    <h1>Авторизуватися</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <label>Логін</label>
+        @Html.EditorFor(m => m.UserName, new { style = "width: 180px" })
+        <label>Пароль</label>
+        @Html.EditorFor(m => m.Password, new {style="width: 180px" })
+        <br />
+        <input type="submit" class="btn btn-primary" value="Log in" />
+    }
+</div>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<RTDS.Domain.Entities.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Користувачі</h2>
+<p>
+     @Html.ActionLink("Додати", "Create")
+</p>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            Логін
+        </th>
+        <th>
+            Ім'я
+        </th>
+        <th>
+            Прізвище
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th>
+            Роль
+        </th>
+        <th>
+            Адреса відділення (складу)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.First_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Last_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone_Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.RoleName)
+            </td>
+            <td>
+                <label>
+                    @Html.Label(string.Format("{0}, {1}, {2}", item.Branch.City.CityName, item.Branch.Street, item.Branch.House))
+                </label>
+
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { userId = item.UserID }, new { @class = "btn" })
+            </td>
+            <td>
+                   @Html.ActionLink("Delete", "Delete", new { userId = item.UserID }, new { @class = "btn" })
+
+            </td>
+        </tr>
+    }
+
+    
+
+</table>

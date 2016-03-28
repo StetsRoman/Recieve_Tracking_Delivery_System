@@ -1,0 +1,45 @@
+﻿@model IEnumerable<RTDS.Domain.Entities.Role>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ролі</h2>
+@using (Html.BeginForm("Index", "Role"))
+{
+    
+    <table class="table table-bordered table-striped" id="roleTable">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Назва
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.Label(item.RoleID.ToString())
+                </td>
+                <td>
+                    @Html.Label(item.RoleName)
+                </td>                               
+            </tr>
+        }
+
+
+    </table>
+
+    <div>
+        <input type="text" name="newRole" id="newRoleTb" value="" style="margin-left:2.5em" />
+        <button id="button2" class="btn" style="margin-bottom:0.9em">Додати роль</button>
+    </div>
+
+}

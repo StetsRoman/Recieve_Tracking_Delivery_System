@@ -1,0 +1,69 @@
+﻿@model  RTDS.WebUI.Models.ViewModelForPackage
+
+@*@model RTDS.Domain.Entities.Package*@
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<SelectListItem> statusLst = ViewBag.PkgStatus;
+    List<SelectListItem> cityLst = ViewBag.City;
+}
+
+<h2>Редагування</h2>
+
+@using (Html.BeginForm("Edit", "Package"))
+{
+
+    <div>@Html.Label("№ посилки") @Html.EditorFor(m => m.Package.Package_Number)</div>
+
+    <div>@Html.Label("Вартість доставки") @Html.EditorFor(m => m.Package.Delivery_Price)</div>
+    <div>@Html.Label("Вага") @Html.EditorFor(m => m.Package.Weith)</div>
+    <div>@Html.Label("Розмір") @Html.EditorFor(m => m.Package.Size)</div>
+    @*<div>@Html.Label("Дата відправлення") @Html.EditorFor(m => m.Package.Send_Date)</div>*@
+
+    <div>
+        @Html.Label("Відправник")
+        <div style="padding-left: 3.0em">
+            @Html.Label("Прізвище") @Html.EditorFor(m => m.Sender.Last_Name)
+            @Html.Label("Ім'я") @Html.EditorFor(m => m.Sender.First_Name)            
+            @Html.Label("№ телефону") @Html.EditorFor(m => m.Sender.Phone_Number)
+        </div>
+    </div>
+    <div>
+        @Html.Label("Отримувач")
+        <div style="padding-left: 3.0em">
+            @Html.Label("Прізвище") @Html.EditorFor(m => m.Receiver.Last_Name)
+            @Html.Label("Ім'я") @Html.EditorFor(m => m.Receiver.First_Name)
+            @Html.Label("№ телефону") @Html.EditorFor(m => m.Receiver.Phone_Number)
+        </div>
+    </div>
+    <div>@Html.Label("Одержувач") </div>
+
+
+    <div>
+        @Html.Label("Адреса відпривника") @Html.DropDownList("City", cityLst, "Виберіть місто", new { id = "cityId" })
+        @Html.DropDownListFor(m => m.Package.SourceLocation, new SelectList(String.Empty, "Value", "Text"), new { id = "SourceLocation" })
+    </div>
+    <div>
+        @Html.Label("Адреса отримувача") @Html.DropDownList("City", cityLst, "Виберіть місто", new { id = "cityId2" })
+        @Html.DropDownListFor(m => m.Package.DestinationLocation, new SelectList(String.Empty, "Value", "Text"), new { id = "DestinationLocation" })
+    </div>
+    <div>
+        @Html.Label("Поточна адреса") @Html.DropDownList("City", cityLst, "Виберіть місто", new { id = "cityId3" })
+        @Html.DropDownListFor(m => m.Package.CurrentLocation, new SelectList(String.Empty, "Value", "Text"), new { id = "CurrentLocation" })
+    </div>
+    <div>
+        @Html.Label("Статус") @Html.DropDownListFor(m => m.Package.StatusID, statusLst)
+    </div>
+
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary" value="Save" />
+       @Html.ActionLink("Відмінити", "Index", null, new { @class = "btn" })
+    </div>
+}
+
+
+
+

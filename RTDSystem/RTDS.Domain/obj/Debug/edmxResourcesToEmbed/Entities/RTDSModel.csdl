@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RTDSContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="Street" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="House" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BranchTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BranchType" Relationship="Self.FK__Branches__Branch__2E70E1FD" FromRole="Branches" ToRole="BranchTypes" />
+    <NavigationProperty Name="City" Relationship="Self.FK__Branches__CityID__2D7CBDC4" FromRole="Branches" ToRole="Cities" />
+    <NavigationProperty Name="Packages" Relationship="Self.FK__Packages__Curren__3DB3258D" FromRole="Branches" ToRole="Packages" />
+    <NavigationProperty Name="Packages1" Relationship="Self.FK__Packages__Destin__3F9B6DFF" FromRole="Branches" ToRole="Packages" />
+    <NavigationProperty Name="Packages2" Relationship="Self.FK__Packages__Source__3EA749C6" FromRole="Branches" ToRole="Packages" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__BranchID__324172E1" FromRole="Branches" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="BranchType">
+    <Key>
+      <PropertyRef Name="BranchTypeID" />
+    </Key>
+    <Property Name="BranchTypeID" Type="Int32" Nullable="false" />
+    <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Branches" Relationship="Self.FK__Branches__Branch__2E70E1FD" FromRole="BranchTypes" ToRole="Branches" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="CityName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Branches" Relationship="Self.FK__Branches__CityID__2D7CBDC4" FromRole="Cities" ToRole="Branches" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone_Number" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Packages" Relationship="Self.FK__Packages__Receiv__3CBF0154" FromRole="Clients" ToRole="Packages" />
+    <NavigationProperty Name="Packages1" Relationship="Self.FK__Packages__Sender__3BCADD1B" FromRole="Clients" ToRole="Packages" />
+  </EntityType>
+  <EntityType Name="Package_Statuses">
+    <Key>
+      <PropertyRef Name="Package_StatusID" />
+    </Key>
+    <Property Name="Package_StatusID" Type="Int32" Nullable="false" />
+    <Property Name="Status_Name" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Packages" Relationship="Self.FK__Packages__Status__3AD6B8E2" FromRole="Package_Statuses" ToRole="Packages" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="PackagID" />
+    </Key>
+    <Property Name="PackagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Package_Number" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Delivery_Price" Type="Double" Nullable="false" />
+    <Property Name="Weith" Type="Double" Nullable="false" />
+    <Property Name="Size" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Send_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="SenderID" Type="Int32" Nullable="false" />
+    <Property Name="ReceiverID" Type="Int32" Nullable="false" />
+    <Property Name="CurrentLocation" Type="Int32" Nullable="false" />
+    <Property Name="SourceLocation" Type="Int32" Nullable="false" />
+    <Property Name="DestinationLocation" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK__Packages__Curren__3DB3258D" FromRole="Packages" ToRole="Branches" />
+    <NavigationProperty Name="Branch1" Relationship="Self.FK__Packages__Destin__3F9B6DFF" FromRole="Packages" ToRole="Branches" />
+    <NavigationProperty Name="Branch2" Relationship="Self.FK__Packages__Source__3EA749C6" FromRole="Packages" ToRole="Branches" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Packages__Receiv__3CBF0154" FromRole="Packages" ToRole="Clients" />
+    <NavigationProperty Name="Client1" Relationship="Self.FK__Packages__Sender__3BCADD1B" FromRole="Packages" ToRole="Clients" />
+    <NavigationProperty Name="Package_Statuses" Relationship="Self.FK__Packages__Status__3AD6B8E2" FromRole="Packages" ToRole="Package_Statuses" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__314D4EA8" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="First_Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone_Number" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK__Users__BranchID__324172E1" FromRole="Users" ToRole="Branches" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleID__314D4EA8" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK__Branches__Branch__2E70E1FD">
+    <End Role="BranchTypes" Type="Self.BranchType" Multiplicity="1" />
+    <End Role="Branches" Type="Self.Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BranchTypes">
+        <PropertyRef Name="BranchTypeID" />
+      </Principal>
+      <Dependent Role="Branches">
+        <PropertyRef Name="BranchTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Branches__CityID__2D7CBDC4">
+    <End Role="Cities" Type="Self.City" Multiplicity="1" />
+    <End Role="Branches" Type="Self.Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Branches">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Packages__Curren__3DB3258D">
+    <End Role="Branches" Type="Self.Branch" Multiplicity="1" />
+    <End Role="Packages" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Packages">
+        <PropertyRef Name="CurrentLocation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Packages__Destin__3F9B6DFF">
+    <End Role="Branches" Type="Self.Branch" Multiplicity="1" />
+    <End Role="Packages" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Packages">
+        <PropertyRef Name="DestinationLocation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Packages__Source__3EA749C6">
+    <End Role="Branches" Type="Self.Branch" Multiplicity="1" />
+    <End Role="Packages" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Packages">
+        <PropertyRef Name="SourceLocation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__BranchID__324172E1">
+    <End Role="Branches" Type="Self.Branch" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Packages__Receiv__3CBF0154">
+    <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+    <End Role="Packages" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Packages">
+        <PropertyRef Name="ReceiverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Packages__Sender__3BCADD1B">
+    <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+    <End Role="Packages" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Packages">
+        <PropertyRef Name="SenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Packages__Status__3AD6B8E2">
+    <End Role="Package_Statuses" Type="Self.Package_Statuses" Multiplicity="1" />
+    <End Role="Packages" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package_Statuses">
+        <PropertyRef Name="Package_StatusID" />
+      </Principal>
+      <Dependent Role="Packages">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__RoleID__314D4EA8">
+    <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RTDSDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Branches" EntityType="Self.Branch" />
+    <EntitySet Name="BranchTypes" EntityType="Self.BranchType" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="Package_Statuses" EntityType="Self.Package_Statuses" />
+    <EntitySet Name="Packages" EntityType="Self.Package" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Branches__Branch__2E70E1FD" Association="Self.FK__Branches__Branch__2E70E1FD">
+      <End Role="BranchTypes" EntitySet="BranchTypes" />
+      <End Role="Branches" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Branches__CityID__2D7CBDC4" Association="Self.FK__Branches__CityID__2D7CBDC4">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Branches" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Packages__Curren__3DB3258D" Association="Self.FK__Packages__Curren__3DB3258D">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="Packages" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Packages__Destin__3F9B6DFF" Association="Self.FK__Packages__Destin__3F9B6DFF">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="Packages" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Packages__Source__3EA749C6" Association="Self.FK__Packages__Source__3EA749C6">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="Packages" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__BranchID__324172E1" Association="Self.FK__Users__BranchID__324172E1">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Packages__Receiv__3CBF0154" Association="Self.FK__Packages__Receiv__3CBF0154">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Packages" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Packages__Sender__3BCADD1B" Association="Self.FK__Packages__Sender__3BCADD1B">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Packages" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Packages__Status__3AD6B8E2" Association="Self.FK__Packages__Status__3AD6B8E2">
+      <End Role="Package_Statuses" EntitySet="Package_Statuses" />
+      <End Role="Packages" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__RoleID__314D4EA8" Association="Self.FK__Users__RoleID__314D4EA8">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
