@@ -15,7 +15,7 @@ namespace RTDS.Domain.Entities
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Package_StatusID { get; set; }
 
         [Required]

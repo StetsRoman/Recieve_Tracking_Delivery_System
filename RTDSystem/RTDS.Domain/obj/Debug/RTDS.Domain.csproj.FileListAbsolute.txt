@@ -8,3 +8,13 @@ C:\Users\Roma\Documents\Visual Studio 2013\Projects\RTDS.WebUI\RTDS.Domain\bin\D
 C:\Users\Roma\Documents\Visual Studio 2013\Projects\RTDS.WebUI\RTDS.Domain\obj\Debug\RTDS.Domain.dll
 C:\Users\Roma\Documents\Visual Studio 2013\Projects\RTDS.WebUI\RTDS.Domain\obj\Debug\RTDS.Domain.pdb
 C:\Users\Roma\documents\visual studio 2013\Projects\RTDS.WebUI\RTDS.Domain\obj\Debug\RTDS.Domain.csprojResolveAssemblyReference.cache
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\bin\Debug\RTDS.Domain.dll.config
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\bin\Debug\RTDS.Domain.dll
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\bin\Debug\RTDS.Domain.pdb
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\bin\Debug\EntityFramework.dll
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\bin\Debug\EntityFramework.SqlServer.dll
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\bin\Debug\EntityFramework.xml
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\bin\Debug\EntityFramework.SqlServer.xml
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\obj\Debug\RTDS.Domain.csprojResolveAssemblyReference.cache
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\obj\Debug\RTDS.Domain.dll
+G:\WorkSpace\Visual Studio 2013\RTDSProject\RTDSystem\RTDS.Domain\obj\Debug\RTDS.Domain.pdb

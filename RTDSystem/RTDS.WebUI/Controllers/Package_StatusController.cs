@@ -74,17 +74,8 @@ namespace RTDS.WebUI.Controllers
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
             else
-            {
-                var rols = _unitOfWork.GetRepository<Package_Statuses>().GetAll();
-                int max = 0;
-                foreach (var item in rols)
-                {
-                    if (item.Package_StatusID > max)
-                    {
-                        max = item.Package_StatusID;
-                    }
-                }
-                _unitOfWork.GetRepository<Package_Statuses>().Add(new Package_Statuses() { Status_Name = statusName, Package_StatusID = max + 1 });
+            {                
+                _unitOfWork.GetRepository<Package_Statuses>().Add(new Package_Statuses() { Status_Name = statusName });
                 _unitOfWork.Save();
             }
             var newStatus = _unitOfWork.GetRepository<Package_Statuses>().Find(c => c.Status_Name == statusName).FirstOrDefault();
