@@ -20,6 +20,7 @@ namespace RTDS.Domain.Entities
 
         [Required]
         [StringLength(16)]
+        [Display(Name="Статус посилки")]
         public string Status_Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
