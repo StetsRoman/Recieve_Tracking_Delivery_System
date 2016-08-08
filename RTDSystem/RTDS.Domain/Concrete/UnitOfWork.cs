@@ -21,6 +21,7 @@ namespace RTDS.Domain.Concrete
            
             RTDSRepository<TEntity> repository = new RTDSRepository<TEntity>(_context);
             _repositories.Add(typeof(TEntity), repository);
+
             return repository;
         }
 
